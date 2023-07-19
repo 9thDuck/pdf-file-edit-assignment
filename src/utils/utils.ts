@@ -36,7 +36,6 @@ export const downloadFileAndAddToDb = async (
                 const fileBuffer = Buffer.concat(chunks);
                 const base64File = fileBuffer.toString('base64');
                 res(base64File);
-                // res(fileBuffer);
               })
               .on('error', (err) => {
                 console.log(err);
