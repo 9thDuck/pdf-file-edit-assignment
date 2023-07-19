@@ -36,3 +36,7 @@ lerna-debug.log*
 
 # Credentials
 credentials.json
+
+#client
+client/node_modules
+client/.env
