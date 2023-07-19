@@ -11,7 +11,9 @@ const Button: React.FC<ButtonProps> = ({ text = '', onClick, disabled }) => {
     <button
       onClick={onClick}
       disabled={disabled}
-      className="rounded border-2 border-solid border-black px-5 py-3 font-medium capitalize"
+      className={`rounded border-2 border-solid border-black px-5 py-3 font-medium capitalize ${
+        disabled ? 'bg-gray-400' : 'shadow-sm hover:shadow-xl duration-300 '
+      }`}
     >
       {text}
     </button>

@@ -6,7 +6,7 @@ const Topbar: React.FC = () => {
   const { fileData, loadPdfHandler, savePdfPageHandler } = usePdf();
 
   return (
-    <div className="flex bg-green-600 p-4 gap-4">
+    <div className="flex p-4 gap-4">
       <Button text="load pdf" onClick={loadPdfHandler} />
       <Button
         text="save pdf"
