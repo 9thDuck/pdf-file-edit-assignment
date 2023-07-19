@@ -17,5 +17,5 @@ model File {
  fileData String
 
  createdAt DateTime @default(now())
- updatedAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
 }
