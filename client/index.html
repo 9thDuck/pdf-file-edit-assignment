@@ -3,11 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="output.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="tailwind-output.css" />
     <title>PDF Editor</title>
-    <script type="text/javascript" src="index.js" defer></script>
   </head>
   <body>
-    <main class="bg-green-600">asdfasdfasdfasdf</main>
+    <div id="app" class="h-screen w-screen p-5">
+      <div class="border-2 border-gray-500 rounded-md p-4">
+        <!-- Topbar -->
+        <nav id="topbar" class="flex flex-row gap-4">
+          <button
+            class="rounded border-2 border-solid border-gray-500 px-5 py-3 font-medium capitalize shadow-sm hover:shadow-xl duration-300"
+            id="load-pdf-btn"
+          >
+            load pdf
+          </button>
+          <button
+            class="rounded border-2 border-solid border-gray-500 px-5 py-3 font-medium capitalize shadow-sm hover:shadow-xl duration-300"
+            id="save-pdf-btn"
+            disabled="disabled"
+          >
+            save pdf
+          </button>
+        </nav>
+        <p id="info-text" class="w-auto h-auto text-xl my-2"></p>
+        <main class="w-full h-auto flex justify-end">
+          <!-- pdf container -->
+          <iframe
+            class="w-[1250px] h-[800px] max-h-[80vh]"
+            id="pdf-container"
+          ></iframe>
+        </main>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
   </body>
 </html>
