@@ -11,7 +11,7 @@ async function bootstrap() {
 
   app.enableCors();
 
-  app.useStaticAssets(path.join(__dirname, '..', 'client'), {
+  app.useStaticAssets(path.join(__dirname, 'client-build'), {
     prefix: '/',
   });
 
