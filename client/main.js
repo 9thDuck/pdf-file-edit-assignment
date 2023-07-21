@@ -1,17 +1,20 @@
 import {
+  clientInstance,
   getElement,
   getFileData,
-  resetErrorText,
+  resetInfoText,
+  saveFileData,
   setErrorText,
+  setSuccessText,
 } from './helpers';
-import { Buffer } from 'buffer';
+// import { Buffer } from 'buffer';
 import { PDFDocument } from 'pdf-lib';
 
 const loadPdfBtn = getElement('#load-pdf-btn');
 const savePdfBtn = getElement('#save-pdf-btn');
 
 const loadPdfHandler = async () => {
-  resetErrorText();
+  resetInfoText();
   try {
     const {
       data: {
@@ -25,6 +28,7 @@ const loadPdfHandler = async () => {
     getElement('#pdf-container').src = URL.createObjectURL(
       new Blob([pdfBytes], { type: 'application/pdf' }),
     );
+    setSuccessText('load');
     savePdfBtn.disabled = false;
   } catch (error) {
     console.log(error);
@@ -33,24 +37,25 @@ const loadPdfHandler = async () => {
 };
 
 const savePdfHandler = async () => {
-  resetErrorText();
+  resetInfoText();
   try {
+    // const iframeRef = (frameRef) => {
+    //   return frameRef.contentWindow
+    //     ? frameRef.contentWindow.document
+    //     : frameRef.contentDocument;
+    // };
+
+    // const iframeContanet = iframeRef(getElement('#pdf-container'));
     const blobUrl = getElement('#pdf-container').src;
     const fetchRes = await fetch(blobUrl);
     const arrayBuffer = await fetchRes.arrayBuffer();
-    const pdfDoc = PDFDocument.load(arrayBuffer);
-
+    const pdfDoc = await PDFDocument.load(arrayBuffer);
     const form = pdfDoc.getForm();
     form.flatten();
-    // const pdfBytes = pdfDoc.save();
-    // const blobUrl = URL.createObjectURL(
-    //   new Blob([pdfBytes], { type: 'application/pdf' }),
-    // );
-
-    // const a = document.createElement('a');
-    // a.href = blobUrl;
-    // a.download = 'example.pdf';
-    // a.click();
+    const pdfBytes = await pdfDoc.save();
+    const fileData = pdfBytes.toString('base64');
+    const savePdfToServerRes = await saveFileData(fileData);
+    setSuccessText('sav');
   } catch (error) {
     console.log(error);
     setErrorText('save');
